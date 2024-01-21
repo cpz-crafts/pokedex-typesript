@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchAllPokemon } from '../services/PokemonService';
 import { Pokemon } from '../types/PokemonTypes';
 import Pagination from './Pagination';
+import { Link } from "react-router-dom"; 
 
 const MainPage = () => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
@@ -22,9 +23,12 @@ const MainPage = () => {
     <div>
       <h1>Pokémon List</h1>
       <ul>
-        {pokemonList.map((pokemon, index) => (
-          <li key={index}>{pokemon.name}</li>
-        ))}
+      {pokemonList.map((pokemon, index) => (
+    <li key={index}>
+
+      <Link to={`/detail/${pokemon.name}`}>{pokemon.name}</Link>
+    </li>
+  ))}
       </ul>
       <Pagination
         itemsPerPage={itemsPerPage}
