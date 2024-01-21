@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate  } from "react-router-dom";
 import { fetchPokemonDetails } from '../services/PokemonService';
 import { PokemonDetails } from "../types/PokemonTypes";
+
 
 const DetailsPage = () => {
     const { pokemonName } = useParams();
     const [pokemonDetails, setPokemonDetails] = useState<PokemonDetails | undefined>(undefined)
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (pokemonName) {
@@ -15,10 +17,14 @@ const DetailsPage = () => {
         }
        
     }, [pokemonName])
+    const goBack = () => {
+        navigate(-1); 
+    };
     return (
         <div>
             {pokemonDetails ? (
                 <div>
+                      <button onClick={goBack}>Go Back</button>
                 <h1>{pokemonDetails?.name}</h1>
                 <ul>
                 {pokemonDetails?.abilities.map((ability, index) => (
