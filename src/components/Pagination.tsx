@@ -21,7 +21,6 @@ const Pagination: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, onPag
       page={currentPage}
       onChange={handlePageChange}
       size="large"
-
     />
   );
 };

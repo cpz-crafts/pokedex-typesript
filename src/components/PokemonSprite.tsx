@@ -19,9 +19,14 @@ const PokemonSprite: React.FC<PokemonSpriteProps> = ({ pokemonName }) => {
         }
        
     }, [pokemonName])
-     return (
-        <img src={pokemonDetails?.sprites?.front_default} alt={pokemonDetails?.name}/>
-     )
+    return (
+        <img 
+            src={pokemonDetails?.sprites?.front_default} 
+            alt={pokemonDetails?.name}
+            style={{ filter: 'grayscale(100%)' }} // Apply grayscale filter
+        />
+    );
+    
 }
 
 export default PokemonSprite;
