@@ -19,10 +19,16 @@ const DetailsPage = () => {
         <div>
             {pokemonDetails ? (
                 <div>
-                <p>{pokemonDetails?.name}</p>
-                <img src={pokemonDetails?.sprites?.front_default} alt={pokemonDetails?.name}/>
+                <h1>{pokemonDetails?.name}</h1>
+                <ul>
+                {pokemonDetails?.abilities.map((ability, index) => (
+                    <li key={index}>{ability.ability.name}</li>
+                ))}
+            </ul>
+                <img src={pokemonDetails?.sprites?.front_default} alt={pokemonDetails?.name}
+                 style={{ width: "200px", height: "200px" }} />
                 </div>
-            ) : (<p>Loading</p>)}
+            ) : (<p>Loading...</p>)}
 
         </div>
     )
