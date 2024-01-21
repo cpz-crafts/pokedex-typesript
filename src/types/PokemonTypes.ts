@@ -17,5 +17,12 @@ export type PokemonDetails = {
   name: string;
   sprites: { front_default: string}
   abilities: Ability[];
-
 }
+
+export type PokemonType = {
+  slot: number;
+  type: {
+    name: string;
+    url: string;
+  };
+};

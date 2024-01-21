@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAllPokemon } from '../services/PokemonService';
 import { Pokemon } from '../types/PokemonTypes';
+import PokemonSprite from "./PokemonSprite"
 import Pagination from './Pagination';
 import { Link } from "react-router-dom"; 
 
 const MainPage = () => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(20);
+  const [itemsPerPage] = useState(10);
   const onPageChange = (pageNumber: number) => setCurrentPage(pageNumber);
 
 
@@ -27,6 +28,8 @@ const MainPage = () => {
     <li key={index}>
 
       <Link to={`/detail/${pokemon.name}`}>{pokemon.name}</Link>
+      <PokemonSprite pokemonName={pokemon.name}/>
+      
     </li>
   ))}
       </ul>
