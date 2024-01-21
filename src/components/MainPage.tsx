@@ -7,7 +7,8 @@ const MainPage = () => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(20);
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const onPageChange = (pageNumber: number) => setCurrentPage(pageNumber);
+
 
 
   useEffect(() => {
@@ -27,8 +28,8 @@ const MainPage = () => {
       </ul>
       <Pagination
         itemsPerPage={itemsPerPage}
-        totalItems={1118} // Total number of Pokémon, you might want to fetch this from the API if possible
-        paginate={paginate}
+        totalItems={1118} 
+        onPageChange={onPageChange}
         currentPage={currentPage}
       />
     </div>

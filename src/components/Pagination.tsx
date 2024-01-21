@@ -1,27 +1,28 @@
 import React from 'react';
+import MuiPagination from '@mui/material/Pagination';
 
 type PaginationProps = {
   totalItems: number;
   itemsPerPage: number;
-  paginate: (pageNumber: number) => void;
+  onPageChange: (pageNumber: number) => void;
   currentPage: number;
 };
 
-const Pagination: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, paginate, currentPage }) => {
-  const pageNumbers = [];
+const Pagination: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, onPageChange, currentPage }) => {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  const handlePageChange = (event: React.ChangeEvent<unknown>, newPage: number) => {
+    onPageChange(newPage);
+  };
 
   return (
-    <div>
-      {pageNumbers.map(number => (
-        <button key={number} onClick={() => paginate(number)}>
-          {number}
-        </button>
-      ))}
-    </div>
+    <MuiPagination
+      count={totalPages}
+      page={currentPage}
+      onChange={handlePageChange}
+      size="large"
+
+    />
   );
 };
 
