@@ -14,7 +14,6 @@ const MainPage = () => {
   const navigate = useNavigate();
 
   const onPageChange = (pageNumber: number) => {
-    // Update the URL
     setCurrentPage(pageNumber)
     navigate(`?page=${pageNumber}`);
   };
