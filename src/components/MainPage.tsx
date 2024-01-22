@@ -27,23 +27,22 @@ const MainPage = () => {
   }, [currentPage, itemsPerPage]);
 
   return (
-    <Paper sx={{ margin: 20 , p: 10, borderRadius: 15}}>
-        <Typography 
-            variant="h3" 
-            sx={{ 
-                fontWeight: 'bold', 
-                color: 'grey', 
-                marginBottom: 3
-            }}>
+    <Paper sx={{ margin: { xs: 2, sm: 3, md: 20, xl: 30 }, p: 10,borderRadius: 15 }}>
+        <Typography variant="h3" sx={{ fontWeight: 'bold', color: 'grey', marginBottom: 3 }}>
          Pokédex
         </Typography>
       <Grid container spacing={2}> 
         {pokemonList.map((pokemon, index) => (
-          <Grid item xs={12} sm={6} key={index}> {/* breakpoints */}
-            <Card sx={{ display: 'flex', Width: 345, backgroundColor: 'black',  '&:hover': {
-                transform: 'translateY(-5px)', // Moves the card up by 5px on hover
-                transition: 'transform 0.3s ease-in-out' // Smooth transition for the movement
-              }}}>
+           <Grid item xs={12} sm={6} key={index}> {/* responsive breakpoints */}
+           <Card sx={{ 
+             display: 'flex', 
+             flexDirection: { xs: 'column', sm: 'row' }, // Stack on small screens
+             backgroundColor: 'black',  
+             '&:hover': {
+               transform: 'translateY(-5px)', 
+               transition: 'transform 0.3s ease-in-out'
+             }
+           }}>
 
               <Box sx={{ display: 'flex', flexDirection: 'column', flex: '1 0 auto' }}>
                 <CardContent sx={{ flex: '1 0 auto' }}>

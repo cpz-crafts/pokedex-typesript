@@ -1,6 +1,8 @@
 # Pokédex Challenge
 This is my submissiong to the Arkus AI frontend developer challenge.
 
+You can see the live version here: [Live Pokédex]()
+
 ## Installation and running
 To install and run the app please clone the repo and install the dependencies.
 
