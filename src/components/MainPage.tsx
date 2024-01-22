@@ -22,11 +22,23 @@ const MainPage = () => {
 
   return (
     <Paper sx={{ margin: 20 , p: 10, borderRadius: 15}}>
-      <h1>Pokedex</h1>
-      <Grid container spacing={2}> {/* Grid container with spacing */}
+        <Typography 
+            variant="h3" 
+            sx={{ 
+                fontWeight: 'bold', 
+                color: 'grey', 
+                marginBottom: 3
+            }}>
+         Pokédex
+        </Typography>
+      <Grid container spacing={2}> 
         {pokemonList.map((pokemon, index) => (
-          <Grid item xs={12} sm={6} key={index}> {/* Grid item with breakpoints */}
-            <Card sx={{ display: 'flex', Width: 345, backgroundColor: 'black'}}>
+          <Grid item xs={12} sm={6} key={index}> {/* breakpoints */}
+            <Card sx={{ display: 'flex', Width: 345, backgroundColor: 'black',  '&:hover': {
+                transform: 'translateY(-5px)', // Moves the card up by 5px on hover
+                transition: 'transform 0.3s ease-in-out' // Smooth transition for the movement
+              }}}>
+
               <Box sx={{ display: 'flex', flexDirection: 'column', flex: '1 0 auto' }}>
                 <CardContent sx={{ flex: '1 0 auto' }}>
                   <Typography component="div" variant="h5" color={'white'}>
@@ -50,7 +62,7 @@ const MainPage = () => {
           </Grid>
         ))}
       </Grid>
-      <Box sx={{ marginTop: '20px' }}>
+      <Box sx={{ marginTop: '40px',  display: 'flex', justifyContent: 'center' }}>
         <Pagination
           itemsPerPage={itemsPerPage}
           totalItems={1118}
