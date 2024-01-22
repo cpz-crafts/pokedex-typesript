@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAllPokemon } from '../services/PokemonService';
 import { Pokemon } from '../types/PokemonTypes';
-import PokemonSprite from "./PokemonSprite"
+import PokemonSprite from "./PokemonSprite";
 import Pagination from './Pagination';
 import { Link } from "react-router-dom"; 
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-
+import { Card, CardContent, Typography, Box, IconButton, Grid, Paper } from '@mui/material';
 
 const MainPage = () => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
+
   const onPageChange = (pageNumber: number) => setCurrentPage(pageNumber);
-
-
 
   useEffect(() => {
     const offset = (currentPage - 1) * itemsPerPage;
@@ -27,43 +21,44 @@ const MainPage = () => {
   }, [currentPage, itemsPerPage]);
 
   return (
-    <Box sx={{ marginLeft: '20px' }}>
+    <Paper sx={{ margin: 20 , p: 10, borderRadius: 15}}>
       <h1>Pokedex</h1>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+      <Grid container spacing={2}> {/* Grid container with spacing */}
         {pokemonList.map((pokemon, index) => (
-          <Card key={index} sx={{ display: 'flex', Width: 345, backgroundColor: 'black'}}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', flex: '1 0 auto' }}>
-              <CardContent sx={{ flex: '1 0 auto' }}>
-                <Typography component="div" variant="h5" color={'white'}>
-                  {pokemon.name}
-                </Typography>
-                <Typography variant="subtitle2" color="text.secondary" component="div">
-                <Link to={`/detail/${pokemon.name}`} style={{ color: 'grey', textDecoration: 'none' }}>
-  View Details
-</Link>
-                </Typography>
-              </CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-                <IconButton aria-label="more">
-                </IconButton>
+          <Grid item xs={12} sm={6} key={index}> {/* Grid item with breakpoints */}
+            <Card sx={{ display: 'flex', Width: 345, backgroundColor: 'black'}}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', flex: '1 0 auto' }}>
+                <CardContent sx={{ flex: '1 0 auto' }}>
+                  <Typography component="div" variant="h5" color={'white'}>
+                    {pokemon.name}
+                  </Typography>
+                  <Typography variant="subtitle2" color="text.secondary" component="div">
+                    <Link to={`/detail/${pokemon.name}`} style={{ color: 'grey', textDecoration: 'none' }}>
+                      View Details
+                    </Link>
+                  </Typography>
+                </CardContent>
+                <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+                  <IconButton aria-label="more">
+                  </IconButton>
+                </Box>
               </Box>
-            </Box>
-            <Box>
-              <PokemonSprite pokemonName={pokemon.name} />
-            </Box>
-          </Card>
+              <Box>
+                <PokemonSprite pokemonName={pokemon.name} />
+              </Box>
+            </Card>
+          </Grid>
         ))}
+      </Grid>
+      <Box sx={{ marginTop: '20px' }}>
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          totalItems={1118}
+          onPageChange={onPageChange}
+          currentPage={currentPage}
+        />
       </Box>
-      <Box  sx={{ marginTop: '20px' }}>
-      <Pagination
-        itemsPerPage={itemsPerPage}
-        totalItems={1118} 
-        onPageChange={onPageChange}
-        currentPage={currentPage}
-       
-      />
-      </Box>
-    </Box>
+    </Paper>
   );
 };
 
