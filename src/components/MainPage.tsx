@@ -3,15 +3,21 @@ import { fetchAllPokemon } from '../services/PokemonService';
 import { Pokemon } from '../types/PokemonTypes';
 import PokemonSprite from "./PokemonSprite";
 import Pagination from './Pagination';
-import { Link } from "react-router-dom"; 
+import { Link, useNavigate, useSearchParams } from "react-router-dom"; 
 import { Card, CardContent, Typography, Box, IconButton, Grid, Paper } from '@mui/material';
 
 const MainPage = () => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(parseInt(searchParams.get('page') || '1', 10));
   const [itemsPerPage] = useState(12);
+  const navigate = useNavigate();
 
-  const onPageChange = (pageNumber: number) => setCurrentPage(pageNumber);
+  const onPageChange = (pageNumber: number) => {
+    // Update the URL
+    setCurrentPage(pageNumber)
+    navigate(`?page=${pageNumber}`);
+  };
 
   useEffect(() => {
     const offset = (currentPage - 1) * itemsPerPage;
